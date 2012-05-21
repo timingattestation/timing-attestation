@@ -1,0 +1,64 @@
+//© 2009-2012 The MITRE Corporation. ALL RIGHTS RESERVED.
+//Permission to use, copy, modify, and distribute this software for any
+//purpose with or without fee is hereby granted, provided that the above
+//copyright notice and this permission notice appear in all copies.
+//THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+//WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+//MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+//ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+//WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+//ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+//OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+//Simple tiresias config file to load up some variables into the code.
+//The first number is what it actually switches on, and the name afterward is just for
+//human readability and for tiresias to sanity check the input.
+
+0:DATABASEUSERNAME:root:
+
+1:DATABASEPASSWORD:Whatever:
+
+//Make sure this is kept in sync with server_config's var of the same name
+2:TIRESIAS_DB_NAME:tiresias:
+
+19:SHARED_DB_NAME:shared:
+
+//NOTE: TIRESIAS DOESN'T ACTUALLY USE THIS
+//BUT TIRESIAS_SCRIPT DOES
+//This is a path relative to the executing binary
+//Include the trailing slash
+3:DROPBOXPATH:..\\dropbox\\:
+
+//This is a path relative to the executing binary
+//Include the trailing slash
+4:STORAGEPATH:..\\storage\\:
+
+//Nuber of milliseconds to wait in main()'s loop for a new measurement
+//before breaking out and checking if any measurements which are
+//pending on a prerequisite have had their prerequisite satisfied yet
+6:WAIT_TIMEOUT:5000:
+
+//Hal.dll uses a portion of memory between HalpRealModeStart
+//and HalpRealModeEnd for stack space when it drops into 
+//virtual 8086 mode in HalpBiosCall in order to clear
+//screen memory. When it's done it doesn't clean up the stack,
+//therefore there is junk data in a portion of hal's .text
+//which is 0s on disk. Client compensates for this, but
+//it only does so for versions of hal which we've confirmed
+//the RVAs for. So this is just to allow us to resolve the
+//RVAs automatically whenever we measure hal, so that for
+//new hals, we can just go confirm the RVAs before modifying 
+//client.
+16:BINARY_SYMBOL:_HalpRealModeStart:hal:
+16:BINARY_SYMBOL:_HalpRealModeEnd:hal:
+
+//These are the functions which consistently get their code 
+//modified vs what exists on disk (see documentation for more info)
+16:BINARY_SYMBOL:_KiSystemCallExitBranch:nt:
+16:BINARY_SYMBOL:_KeFlushCurrentTb@0:nt:
+16:BINARY_SYMBOL:@RtlPrefetchMemoryNonTemporal@8:nt:
+
+//For if we ever need something else for arbitrary binaries
+//18:RESERVED
+
+//20 - next available number

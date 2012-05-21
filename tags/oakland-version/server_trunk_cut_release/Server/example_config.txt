@@ -1,0 +1,80 @@
+//© 2009-2012 The MITRE Corporation. ALL RIGHTS RESERVED.
+//Permission to use, copy, modify, and distribute this software for any
+//purpose with or without fee is hereby granted, provided that the above
+//copyright notice and this permission notice appear in all copies.
+//THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+//WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+//MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+//ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+//WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+//ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+//OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+#!!!!!!!!!!THIS CONFIG FILE IS NOT THE REAL ONE
+#!!!!!!!!!!YOU MUST CREATE A COPY NAMED server_config.txt IN THE SAME DIRECTORY
+
+#Simple server config file to load up some variables into the code.
+#The first number is what it actually switches on, and the name afterward is just for
+#human readability and for tiresias to sanity check the input.
+
+0:DATABASE_USERNAME:root:
+
+1:DATABASE_PASSWORD:Whatever:
+
+#This is the name of the database where all the tiresias data will be stored.
+2:TIRESIAS_DB_NAME:tiresias:
+
+#This is the name of the database where all the tiresias data will be stored.
+3:SERVER_DB_NAME:server:
+
+
+#You can find the interface number by just removing this line and then getting the
+#interactive prompt. Then put that number on the below line.
+4:SNIFFING_INTERFACE:2:
+
+#The default source IP used in the outbound packets from this server.
+#This can be changed at runtime
+5:DEFAULT_SRC_IP:192.168.187.129:
+
+
+#The default destination IP used in the outbound packets from this server.
+#This can be changed at runtime
+6:DEFAULT_DST_IP:192.168.187.161:
+
+
+#The default destination hostname used in the outbound packets from this server.
+7:DEFAULT_DST_HOSTNAME::
+
+#The default time between checks in MICROSECONDS by the polling thread
+8:POLLING_FREQUENCY:20000:
+
+#The default tolerance in SECONDS between present time and last time a host was measured
+9:POLLING_TOLERANCE:20:
+
+#A comma-deliminated list of IP addresses which will be loaded into
+# the HostsToMeasure table for use by the polling thread
+12:HOSTS_TO_MEASURE:192.168.187.161:
+
+#A comma-deliminated list of "modules" which will be loaded into
+# the ModulesToMeasure table for use by the polling thread
+#Valid options
+#TIMING_TEST
+#TICKSTAMP_ATTESTATION
+13:MODULES_TO_MEASURE:TIMING_TEST:
+
+20:HOST_LIMITS:192.168.187.161||1650000||1500000
+
+//CPU Limits by BrandString - separate brand string from limit with "brandstring text"||upper limit||lower limit
+//separate multiple entries with commas as usual
+//example: 21:BRANDSTRING_LIMITS:test||2000||1000,test2||3000||2000:
+21:BRANDSTRING_LIMITS:Intel(R) Core(TM)2 Duo CPU T7700 @ 2.40GHz||134935||30328,Intel(R) Core(TM)2 Quad CPU Q9650 @ 3.00Ghz||158000||33788,Intel(R) Core(TM)2 Duo CPU T9900 @ 3.06GHz||68501||30181,Intel(R) Core(TM)2 Duo CPU T9800 @ 2.93Ghz||99619||24107:
+
+#This is the name of the database where data shared between server and tiresias will be stored
+25:SHARED_DB_NAME:shared:
+
+26:KEYS_FOLDER_NAME:..\\client_keys\\:
+
+27:TPM_TICKS_LIMIT:15500:
+
+//28 NEXT AVAILABLE
+

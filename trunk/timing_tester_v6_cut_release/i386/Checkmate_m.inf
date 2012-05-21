@@ -1,0 +1,70 @@
+; -- Checkmate_M.INF --
+;
+
+[Version]
+signature  = "$Windows NT$"
+Class      = Net
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider   = %MITRE%
+DriverVer  = 10/01/2002,6.0.4063.0
+DriverPackageType = NdisIMMiniport
+
+[ControlFlags]
+ExcludeFromSelect = Checkmatemp
+
+[DestinationDirs]
+DefaultDestDir=12
+; No files to copy 
+
+[Manufacturer]
+%MITRE% = MITRE,NTx86,NTia64,NTamd64
+
+; For Win2K
+[MITRE]
+%CheckmateMP_Desc% = CheckmateMP.ndi, Checkmatemp
+
+; For XP and later
+[MITRE.NTx86]
+%CheckmateMP_Desc% = CheckmateMP.ndi, Checkmatemp
+
+[MITRE.NTia64]
+%CheckmateMP_Desc% = CheckmateMP.ndi, Checkmatemp
+
+[MITRE.NTamd64]
+%CheckmateMP_Desc% = CheckmateMP.ndi, Checkmatemp
+
+[CheckmateMP.ndi]
+Characteristics = 0x29 ;NCF_NOT_USER_REMOVABLE | NCF_VIRTUAL | NCF_HIDDEN
+CopyFiles = 
+
+[CheckmateMP.ndi.Services]
+AddService = Checkmate,0x2, CheckmateMP.AddService
+
+
+[CheckmateMP.AddService]
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Checkmate.sys
+
+
+[CheckmateMP.AddService.AddReg]
+; ----------------------------------------------------------------------
+; Add any miniport-specific parameters here.  These are params that your
+; filter device is going to use.
+;
+;HKR, Parameters, ParameterName,  0x10000, "MultiSz", "Parameter", "Value"
+;HKR, Parameters, ParameterName2, 0x10001, 4
+
+[Strings]
+MITRE = "MITRE"
+CheckmateMP_Desc = "Checkmate Miniport"
+
+[SourceDisksNames]
+;None 
+
+[SourceDisksFiles]
+;None
+
+
+

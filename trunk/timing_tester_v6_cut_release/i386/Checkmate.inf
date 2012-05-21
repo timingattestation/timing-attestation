@@ -1,0 +1,126 @@
+; -- Checkmate.INF --
+;
+; Checkmate driver INF file - this is the INF for the service (protocol)
+; part.
+;
+
+[Version]
+Signature  = "$Windows NT$"
+Class      = NetService
+ClassGUID  = {4D36E974-E325-11CE-BFC1-08002BE10318}
+Provider   = %MITRE%
+DriverVer  = 10/01/2002,6.0.4063.0
+DriverPackageType = Network
+
+[Manufacturer]
+%MITRE% = MITRE,NTx86,NTia64,NTamd64
+
+[ControlFlags]
+
+;=========================================================================
+;
+;=========================================================================
+
+; For Win2K
+[MITRE]
+%Checkmate_Desc% = Checkmate.ndi, ms_Checkmate
+
+; For XP and later
+[MITRE.NTx86]
+%Checkmate_Desc% = Checkmate.ndi, ms_Checkmate
+
+[MITRE.NTia64]
+%Checkmate_Desc% = Checkmate.ndi, ms_Checkmate
+
+[MITRE.NTamd64]
+%Checkmate_Desc% = Checkmate.ndi, ms_Checkmate
+
+[Checkmate.ndi]
+AddReg          = Checkmate.ndi.AddReg, Checkmate.AddReg
+Characteristics = 0x4410 ;  NCF_FILTER | NCF_NDIS_PROTOCOL !--Filter Specific--!!
+CopyFiles       = Checkmate.Files.Sys
+CopyInf         = Checkmate_m.inf
+
+[Checkmate.ndi.Remove]
+DelFiles = Checkmate.Files.Sys
+
+[Checkmate.ndi.Services]
+AddService = Checkmate,, Checkmate.AddService
+
+[Checkmate.AddService]
+DisplayName    = %CheckmateService_Desc%
+ServiceType    = 1 ;SERVICE_KERNEL_DRIVER
+StartType      = 3 ;SERVICE_DEMAND_START
+ErrorControl   = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Checkmate.sys
+LoadOrderGroup = PNP_TDI
+AddReg         = Checkmate.AddService.AddReg
+
+
+[Checkmate.AddService.AddReg]
+; ----------------------------------------------------------------------
+; Add any miniport-specific parameters here.  These are params that your
+; filter device is going to use.
+;
+;HKR, Parameters, ParameterName,  0x10000, "MultiSz", "Parameter", "Value"
+;HKR, Parameters, ParameterName2, 0x10001, 4
+
+
+; ----------------------------------------------------------------------
+; File copy
+;
+[SourceDisksNames]
+1=%DiskDescription%,"",,
+
+[SourceDisksFiles]
+Checkmate.sys=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+Checkmate.Files.Sys   = 12   ; %windir%\System32\drivers
+
+[Checkmate.Files.Sys]
+Checkmate.sys,,,2
+
+; ----------------------------------------------------------------------
+; Filter Install
+;
+
+[Checkmate.ndi.AddReg]
+HKR, Ndi, HelpText, , %Checkmate_HELP%
+
+; ----------------------------------------------------------------------
+; !!--Filter Specific--!!
+;
+; Note:
+; 1. Other components may also have UpperRange/LowerRange but for filters
+;    the value of both of them must be noupper/nolower
+; 2. The value FilterClass is required.
+; 3. The value Service is required
+; 4. FilterDeviceInfId is the InfId of the filter device (miniport) that will
+;    be installed for each filtered adapter.
+;    In this case this is Checkmatemp (refer to Checkmate_m.inf)
+;
+HKR, Ndi,            FilterClass,         , failover
+HKR, Ndi,            FilterDeviceInfId,   , Checkmatemp
+HKR, Ndi,            Service,             , Checkmate
+HKR, Ndi\Interfaces, UpperRange,          , noupper
+HKR, Ndi\Interfaces, LowerRange,          , nolower
+HKR, Ndi\Interfaces, FilterMediaTypes,    , "ethernet"
+
+[Checkmate.AddReg]
+; The following key is Required
+; The following key is Checkmate specific
+HKR, Parameters, Param1, 0, 4
+
+; ----------------------------------------------------------------------
+[Strings]
+MITRE = "MITRE"
+DiskDescription = "MITRE Checkmate attestation driver"
+
+Checkmate_Desc = "MITRE Checkmate attestation driver"
+Checkmate_HELP = "MITRE Checkmate attestation driver"
+CheckmateService_Desc = "MITRE Checkmate attestation driver"
+
+
+
