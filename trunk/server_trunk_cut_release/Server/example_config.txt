@@ -62,19 +62,18 @@
 #TICKSTAMP_ATTESTATION
 13:MODULES_TO_MEASURE:TIMING_TEST:
 
-20:HOST_LIMITS:192.168.187.161||1650000||1500000
+20:HOST_LIMITS:192.168.187.161||1||2500000
 
 //CPU Limits by BrandString - separate brand string from limit with "brandstring text"||upper limit||lower limit
 //separate multiple entries with commas as usual
 //example: 21:BRANDSTRING_LIMITS:test||2000||1000,test2||3000||2000:
-21:BRANDSTRING_LIMITS:Intel(R) Core(TM)2 Duo CPU T7700 @ 2.40GHz||134935||30328,Intel(R) Core(TM)2 Quad CPU Q9650 @ 3.00Ghz||158000||33788,Intel(R) Core(TM)2 Duo CPU T9900 @ 3.06GHz||68501||30181,Intel(R) Core(TM)2 Duo CPU T9800 @ 2.93Ghz||99619||24107:
-
+21:BRANDSTRING_LIMITS:Intel(R) Core(TM)2 Quad CPU Q9650 @ 3.00Ghz||110900||111200:
 #This is the name of the database where data shared between server and tiresias will be stored
 25:SHARED_DB_NAME:shared:
 
 26:KEYS_FOLDER_NAME:..\\client_keys\\:
 
-27:TPM_TICKS_LIMIT:15500:
+27:TPM_TICKS_LIMIT:890:
 
 //28 NEXT AVAILABLE
 

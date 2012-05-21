@@ -163,7 +163,7 @@ int SelfCheck_v6_tiresias(	char * memToCheck,
 	}
 	currentIndex = 0;
 	//Place these at whatever clientbase+x address you have to place breakpoints in the client code while debugging
-	memToCheck[0x490] = 0xcc;
+	//memToCheck[0x490] = 0xcc;
 	//memToCheck[0xa9f] = 0xcc;
 	//memToCheck[0xb30] = 0xcc;
 	//memToCheck[0xc23] = 0xcc;

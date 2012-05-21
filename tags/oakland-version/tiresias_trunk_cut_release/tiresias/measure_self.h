@@ -38,16 +38,16 @@
 //Find this in IDA by searching for selfCheckV6End
 #define CLIENT_RELATIVE_CHECKSUM_END									0xE5E
 //Find this in IDA by searching for normalparent (CAREFUL in checked build, make sure you get instruction after call)
-#define CLIENT_RELATIVE_PARENT_RET_NORMAL								0x1CDC
+#define CLIENT_RELATIVE_PARENT_RET_NORMAL								0x1BD0
 //Find this in IDA by searching for tpmparent (CAREFUL in checked build, make sure you get instruction after call)
-#define CLIENT_RELATIVE_PARENT_RET_TICKSTAMP_ATTESTATION				0x203C
+#define CLIENT_RELATIVE_PARENT_RET_TICKSTAMP_ATTESTATION				0x1EF0
 //Find this in IDA by searching for timegrandparent (CAREFUL in checked build, make sure you get instruction after call)
-#define CLIENT_RELATIVE_GRANDPARENT_RET_TIMING_TEST						0x7B31
+#define CLIENT_RELATIVE_GRANDPARENT_RET_TIMING_TEST						0x7A11
 //Find this in IDA by searching for tpmgrandparent (CAREFUL in checked build, make sure you get instruction after call)
-#define CLIENT_RELATIVE_GRANDPARENT_RET_TICKSTAMP_ATTESTATION			0x7E11
+#define CLIENT_RELATIVE_GRANDPARENT_RET_TICKSTAMP_ATTESTATION			0x7CF1
 //This is NdisRequest+6 because NdisRequest was found to be the last code in the client .text section
 //and because NdisRequest is a 6 byte indirect jump through the IAT
-#define CLIENT_RELATIVE_MINICHECK_END									0x8132
+#define CLIENT_RELATIVE_MINICHECK_END									0x8012
 
 //Jump short "a" bytes past the next instruction (range of +127 to -128) if parity flag is set
 #define JP(a)			\
