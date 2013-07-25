@@ -35,7 +35,7 @@
 */
 
 /*
-	You must invoke this code from within SMRAM. We had to remove all Dell-specific offsets and such, so there
+	You must invoke this code from within SMRAM. We had to remove all Manufacturer-specific offsets and such, so there
 	are some blanks which you must fill in yourself (#define's).  But other than that, this code is complete.
 */
 
@@ -67,7 +67,7 @@
 #define LOCALITY					0
 #define NUM_ITERATIONS				2500000			// number of iterations for SelfCheck_v6_bios()
 
-// The following 3 values are specific/proprietary to Dell so we cannot share these addresses
+// The following 3 values are specific/proprietary to the manufacturer so we cannot share these addresses
 #define OUR_BASE_ADDR				0xDEADBEEF		// *** YOU DEFINE *** Base Address in SMRAM where this binary will be located (defined by you when you paste this executable into the SMRAM binary)
 #define SMM_DATA_STORE				0xDEADBEEF		// *** YOU DEFINE *** This is where BC code will store the measurement data
 #define KERN_DATA_STORE				0xDEADBEEF		// *** YOU DEFINE *** BC code will move the data to this address, accessible by the kernel
@@ -892,7 +892,7 @@ selfCheckV6Start:
 	slice = 0;
 	
 	/* 	this is where we define the linear ranges that we'll measure after the self-measurement 
-		check has taken place.  Our actual slices are proprietary to Dell so we had to undefine them, but
+		check has taken place.  Our actual slices are proprietary to the manufacturer so we had to undefine them, but
 		we left some lame samples just to provide an idea of how to use them. 
 		
 		*Note: 

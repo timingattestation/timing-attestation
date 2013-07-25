@@ -40,7 +40,7 @@
 #include "bios_measure.h"
 
 // BIOS revision for which this will be compiled for
-#define BIOS_REV						29						// A29, A30, etc ...
+#define BIOS_REV						00						// A29, A30, etc ...
 
 /*
 	These define the measurement slices for firmware measurement
@@ -53,19 +53,19 @@
 #define BIOS_END						0xFFFFFFFF		// same for every E6400 bios revision
 #define IVT_LEN							0x1E0			// on this system, the IVT only occupies bytes 0-1DFh ...
 
-#if BIOS_REV == 29
+#if BIOS_REV == 00
 #define NUM_SLICES   					3				// change this to as many linear range measurements as you want to make, this is 4 just to show some examples
 #define RET_CTRL_FLOW					0xDEADBEEF		// The address of the funciton you hooked to call this code
 
-#elif BIOS_REV == 30
+#elif BIOS_REV == 01
 #define NUM_SLICES   					2
 #define RET_CTRL_FLOW					0xDEADBEEF		// The address of the funciton you hooked to call this code
 
-#elif BIOS_REV == 31
+#elif BIOS_REV == 01
 #define NUM_SLICES   					2
 #define RET_CTRL_FLOW					0xDEADBEEF		// The address of the funciton you hooked to call this code
 
-#elif BIOS_REV == 32
+#elif BIOS_REV == 03
 #define NUM_SLICES   					2
 #define RET_CTRL_FLOW					0xDEADBEEF		// The address of the funciton you hooked to call this code
 
